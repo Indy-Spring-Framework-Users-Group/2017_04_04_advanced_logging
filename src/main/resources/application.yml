@@ -1,0 +1,14 @@
+spring:
+  profiles: dev
+logging:
+  level:
+    ROOT: info
+    com.isf: debug
+  file: my-app.logs
+---
+spring:
+  profiles: prod
+logging:
+  level:
+    ROOT: warn
+    com.isf: info

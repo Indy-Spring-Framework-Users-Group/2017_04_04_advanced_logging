@@ -3,19 +3,22 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
-    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
-
-    <springProfile name="prod">
-        <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-            <file>prod-${bySecond}.log</file>
-            <encoder>
-                <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n</pattern>
-            </encoder>
-        </appender>
-        <root level="WARN">
-            <appender-ref ref="FILE" />
-        </root>
-    </springProfile>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+                <marker>RATED_R</marker>
+            </evaluator>
+            <onMismatch>DENY</onMismatch>
+            <onMatch>NEUTRAL</onMatch>
+        </filter>
+        <file>adult.log</file>
+        <encoder>
+            <pattern>%X{user.login} [%X{user.name}] - %m%n</pattern>
+        </encoder>
+    </appender>
+    <root level="WARN">
+        <appender-ref ref="FILE" />
+    </root>
 
     <root level="WARN">
         <appender-ref ref="CONSOLE" />

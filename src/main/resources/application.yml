@@ -1,10 +1,11 @@
+logging.config: classpath:logback-spring.xml
+---
 spring:
   profiles: dev
 logging:
   level:
     ROOT: info
     com.isf: debug
-  file: my-app.logs
 ---
 spring:
   profiles: prod

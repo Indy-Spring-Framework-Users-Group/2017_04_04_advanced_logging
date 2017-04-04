@@ -21,7 +21,7 @@ public class MovieController {
     @GetMapping(value = "movie/{term}")
     public Movie getMovies(@PathVariable String term){
         Movie movie = Movie.from(restTemplate.getForObject("http://www.omdbapi.com/?t=" + term, Map.class));
-        log.debug("got back movies: {}", movie);
+        log.info("got back movies: {}", movie);
         return movie;
     }
 }

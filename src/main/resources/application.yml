@@ -1,10 +1,12 @@
+logging:
+  config: classpath:log4j2.xml
+---
 spring:
   profiles: dev
 logging:
   level:
-    ROOT: info
+    ROOT: warn
     com.isf: debug
-  file: my-app.logs
 ---
 spring:
   profiles: prod
